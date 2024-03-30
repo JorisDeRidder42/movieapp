@@ -29,8 +29,8 @@ export class MoviesPage implements OnInit {
 
     this.movieService.getTopRatedMovies(this.currentPage).subscribe((res:any) => {
       loading.dismiss()
-      this.movies.push(...res.results)
       console.log(res)
+      this.movies.push(...res.results)
 
       event?.target.complete()
       //swift guard that it Can never run while at last page
