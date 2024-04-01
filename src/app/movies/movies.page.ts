@@ -12,12 +12,21 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 export class MoviesPage implements OnInit {
   movies:any[] = [];
   currentPage:number = 1;
-  imageBaseUrl = environment.images
+  imageBaseUrl = environment.images;
+  searchTerm: string = "";
+  
 
   constructor(private movieService: MovieService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
    this.loadMovies();
+  }
+
+  searchMovie() {
+    this.movies = [];
+    this.movieService.getSearchedMovie(this.searchTerm).subscribe((res:any) => {
+      this.movies.push(...res.results)
+    })
   }
 
   async loadMovies(event?: InfiniteScrollCustomEvent){
@@ -29,19 +38,17 @@ export class MoviesPage implements OnInit {
 
     this.movieService.getTopRatedMovies(this.currentPage).subscribe((res:any) => {
       loading.dismiss()
-      console.log(res)
       this.movies.push(...res.results)
 
       event?.target.complete()
       //swift guard that it Can never run while at last page
       if(event){
         event.target.disabled = res.total_pages  === this.currentPage
-      }
-        
+      } 
     })
-  }
-  loadMoreMovies(event: InfiniteScrollCustomEvent){
+   }
+   loadMoreMovies(event: InfiniteScrollCustomEvent){
     this.currentPage++;
     this.loadMovies(event);
   }
-}
+  } 

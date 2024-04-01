@@ -8,6 +8,7 @@ export interface ApiResult {
   results: any[];
   total_pages: number;
   total_results: number;
+  query: string;
 }
 
 
@@ -15,12 +16,18 @@ export interface ApiResult {
   providedIn: 'root'
 })
 export class MovieService {
+  searchTerm:string = "";
+  movies:any[] = [];
 
   constructor(private http: HttpClient) { }
 
-
   getTopRatedMovies(page = 1) : Observable<ApiResult>{  
     return this.http.get<ApiResult>(`${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&page=${page}`)
+  }
+
+  getSearchedMovie(searchTerm:string): Observable<any>{
+    return this.http.get<any>(`${environment.baseUrl}/search/movie?query=${searchTerm}&api_key=${environment.apiKey}`)
+    // return this.http.get<any>('https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=4b68fcf3cf1504d0670679076602c7bd');
   }
 
   getMovieDetails(id: string){

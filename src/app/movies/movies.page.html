@@ -10,15 +10,16 @@
       <ion-title size="large">Trending movies</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchMovie()"></ion-searchbar>
   <ion-list>
     <ion-item button *ngFor="let item of movies" [routerLink]="item.id">
       <ion-avatar slot="start">
         <img [src]="imageBaseUrl + '/w92' + item.poster_path">
       </ion-avatar>
       <ion-label>
-        {{item.title}}
+       {{item.title}}
         <p>{{item.release_date | date: 'y'}}</p>
-        <ion-badge slot="end">{{item.vote_average}}</ion-badge>
+        <ion-badge color="secondary" slot="end">{{item.vote_average.toFixed(2)}}</ion-badge>
       </ion-label>
     </ion-item>
   </ion-list>
