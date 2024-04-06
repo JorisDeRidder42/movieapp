@@ -24,10 +24,13 @@ export class MovieService {
   getTopRatedMovies(page = 1) : Observable<ApiResult>{  
     return this.http.get<ApiResult>(`${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&page=${page}`)
   }
+  getTopRatedShows(page = 1) : Observable<ApiResult>{  
+    return this.http.get<ApiResult>(`${environment.baseUrl}/tv/popular?api_key=${environment.apiKey}&page=${page}`)
+  }
 
   getSearchedMovie(searchTerm:string): Observable<any>{
     return this.http.get<any>(`${environment.baseUrl}/search/movie?query=${searchTerm}&api_key=${environment.apiKey}`)
-    // return this.http.get<any>('https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=4b68fcf3cf1504d0670679076602c7bd');
+    // return this.http.get<any>('https://api.themoviedb.org/3/search/movie?query=Jack+Reacher&api_key=3329aa4b909d13a4c1b9b9f507bc3008');
   }
 
   getMovieDetails(id: string){

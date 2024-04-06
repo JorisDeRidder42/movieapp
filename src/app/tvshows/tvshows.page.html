@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>tvshows</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">tvshows</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchMovie()"></ion-searchbar> -->
+  <ion-list>
+    <ion-item button *ngFor="let item of shows" [routerLink]="item.id">
+      <ion-avatar slot="start">
+        <img [src]="imageBaseUrl + '/w92' + item.poster_path">
+      </ion-avatar>
+      <ion-label>
+       {{item.name}}
+        <p>{{item.first_air_date | date: 'y'}}</p>
+        <ion-badge color="secondary" slot="end">{{item.vote_average.toFixed(2)}}</ion-badge>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMoreShows($event)">
+    <ion-infinite-scroll-content loadingText="Loading..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
