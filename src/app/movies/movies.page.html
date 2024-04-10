@@ -13,6 +13,9 @@
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchMovie()"></ion-searchbar>
   <ion-list>
     <ion-item button *ngFor="let item of movies" [routerLink]="item.id">
+      <ion-button slot="end" (click)="addToFavorites()">
+        <ion-icon name="star"></ion-icon>
+      </ion-button>
       <ion-avatar slot="start">
         <img [src]="imageBaseUrl + '/w92' + item.poster_path">
       </ion-avatar>

@@ -36,4 +36,7 @@ export class MovieService {
   getMovieDetails(id: string){
     return this.http.get(`${environment.baseUrl}/movie/${id}?api_key=${environment.apiKey}`)
   }
+  getAddToFavoriteMovies(id: string){
+    this.http.get(`${environment.baseUrl}/account/${id}/movies?api_key=${environment.apiKey}`)
+  }
 }

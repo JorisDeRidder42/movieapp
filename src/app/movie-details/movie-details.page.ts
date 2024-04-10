@@ -23,4 +23,8 @@ export class MovieDetailsPage implements OnInit {
   openHomePage(){
     window.open(this.movie.homepage);
   }
+  addToFavorites(){
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('id', id)
+  }
 }

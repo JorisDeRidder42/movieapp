@@ -3,6 +3,7 @@ import { MovieService } from './../movie.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -16,7 +17,7 @@ export class MoviesPage implements OnInit {
   searchTerm: string = "";
   
 
-  constructor(private movieService: MovieService, private loadingCtrl: LoadingController) { }
+  constructor(private movieService: MovieService, private loadingCtrl: LoadingController,private route: ActivatedRoute) { }
 
   ngOnInit() {
    this.loadMovies();
@@ -50,5 +51,9 @@ export class MoviesPage implements OnInit {
    loadMoreMovies(event: InfiniteScrollCustomEvent){
     this.currentPage++;
     this.loadMovies(event);
-  }
+    }
+    addToFavorites(){
+      const id = this.route.snapshot.paramMap.get('id');
+      console.log('id', id)
+    }
   } 
